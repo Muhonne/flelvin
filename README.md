@@ -1,6 +1,6 @@
 # flelvin
 
-A new Flutter project.
+Uses Mount Kelvin apis to control rooms.
 
 ## Getting Started
 
