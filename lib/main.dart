@@ -28,7 +28,15 @@ class _SiteKeyState extends State<SiteKey> {
   void initState() {
     SharedPreferences.getInstance().then((prefs) {
       if (prefs.containsKey(storageKey)) {
-        _keyController.text = prefs.get(storageKey).toString();
+        var siteKey = prefs.get(storageKey).toString();
+        _keyController.text = siteKey;
+        if (siteKey.compareTo("") != 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Controls(api: Api(_keyController.text))),
+          );
+        }
       }
     });
     super.initState();
@@ -46,8 +54,7 @@ class _SiteKeyState extends State<SiteKey> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) =>
-              Controls(api: Api(_keyController.text))),
+          builder: (context) => Controls(api: Api(_keyController.text))),
     );
   }
 

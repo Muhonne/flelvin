@@ -28,14 +28,19 @@ class Api {
     }
   }
 
-  allOff() {}
+  allOff() {
+     String jsonBody = json.encode({
+      "id": "allOff",
+    });
+    http.post(apiUrl + "/applyScene", headers: postHeaders, body: jsonBody);
+  }
 
   applyDevice(String id, bool on, int bri) {
     String jsonBody = json.encode({
       "id": id,
       "state": {"on": on, "bri": bri}
     });
-    http.post(apiUrl + "applyDevice", headers: postHeaders, body: jsonBody);
+    http.post(apiUrl + "/applyDevice", headers: postHeaders, body: jsonBody);
   }
 
   lightOff(String id) {
@@ -43,7 +48,7 @@ class Api {
       "id": id,
       "state": {"on": false}
     });
-    http.post(apiUrl + "applyDevice", headers: postHeaders, body: jsonBody);
+    http.post(apiUrl + "/applyDevice", headers: postHeaders, body: jsonBody);
   }
 
   lightOn(String id) {
@@ -51,7 +56,7 @@ class Api {
       "id": id,
       "state": {"on": true, "bri": 150}
     });
-    http.post(apiUrl + "applyDevice", headers: postHeaders, body: jsonBody);
+    http.post(apiUrl + "/applyDevice", headers: postHeaders, body: jsonBody);
   }
 
   applyRoom(String id, bool on, int bri) {
@@ -59,6 +64,6 @@ class Api {
       "id": id,
       "state": {"on": true, "bri": bri}
     });
-    http.post(apiUrl + "applyRoom", headers: postHeaders, body: jsonBody);
+    http.post(apiUrl + "/applyRoom", headers: postHeaders, body: jsonBody);
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flelvin/api.dart';
 
 class Device {
   String id;
@@ -46,11 +45,13 @@ class Site {
   }
 
   getRoomBrightness(String roomId){
-//    List <Device> roomDevices = this.devices.where((device ) => device.roomId == roomId);
-//    var sum = 0;
-//    roomDevices.forEach((device) => {
-//      sum = sum + device.bri
-//    });
+   List<Device> roomDevices = this.devices.where((device ) => device.roomId == roomId).toList();
+   var sum = 0;
+   roomDevices.forEach((device) {
+     print(device.name + "  " + device.on.toString() + " " + device.bri.toString());
+     sum = sum + (device.on ? device.bri : 0);
+   });
+   print("ROOM BRIGHTESS " + (sum / roomDevices.length).toString());
     // return sum / roomDevices.length;
     return 0.0;
   }
