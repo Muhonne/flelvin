@@ -62,7 +62,7 @@ class Api {
   applyRoom(String id, bool on, int bri) {
     String jsonBody = json.encode({
       "id": id,
-      "state": {"on": true, "bri": bri}
+      "state": {"on": on, "bri": bri}
     });
     http.post(apiUrl + "/applyRoom", headers: postHeaders, body: jsonBody);
   }

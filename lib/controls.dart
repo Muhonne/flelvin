@@ -1,5 +1,6 @@
 import 'package:flelvin/site.dart';
 import 'package:flelvin/api.dart';
+import 'package:flelvin/socketApi.dart';
 import 'package:flelvin/statefulSlider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,20 +18,39 @@ class _ControlsState extends State<Controls> {
   Site _site = Site.fromData("", [], []);
   Future<Site> _futureSite;
   Map<String, double> roomBrightnesses;
+  bool _errored = false;
 
   @override
   void initState() {
-    widget.api.fetchSite().then((site) => {
-          setState(() {
-            _site = site;
-            _futureSite = Future.value(site);
-          })
-        });
+    widget.api
+        .fetchSite()
+        .then((site) => {
+              setState(() {
+                _site = site;
+                _futureSite = Future.value(site);
+              })
+            })
+        .catchError((error) => {
+              setState(() {
+                _errored = true;
+              })
+            });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_errored) {
+      return Scaffold(
+            appBar: AppBar(
+              title: Text("Oof"),
+            ),
+            body: Center(
+              child: Text("Could not fetch site, is the key correct?"),
+            )
+      );
+    }
+      
     return FutureBuilder(
       future: _futureSite,
       builder: (BuildContext context, AsyncSnapshot<Site> snapshot) {

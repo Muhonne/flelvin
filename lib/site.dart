@@ -48,10 +48,9 @@ class Site {
    List<Device> roomDevices = this.devices.where((device ) => device.roomId == roomId).toList();
    var sum = 0;
    roomDevices.forEach((device) {
-     print(device.name + "  " + device.on.toString() + " " + device.bri.toString());
      sum = sum + (device.on ? device.bri : 0);
    });
-   print("ROOM BRIGHTESS " + (sum / roomDevices.length).toString());
+   // TODO: FIXME
     // return sum / roomDevices.length;
     return 0.0;
   }

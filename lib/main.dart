@@ -1,5 +1,6 @@
 import 'package:flelvin/api.dart';
 import 'package:flelvin/controls.dart';
+import 'package:flelvin/socketApi.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,11 +32,12 @@ class _SiteKeyState extends State<SiteKey> {
         var siteKey = prefs.get(storageKey).toString();
         _keyController.text = siteKey;
         if (siteKey.compareTo("") != 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Controls(api: Api(_keyController.text))),
-          );
+          SocketApi(_keyController.text);
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => Controls(api: Api(_keyController.text))),
+          // );
         }
       }
     });
